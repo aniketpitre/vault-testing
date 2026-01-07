@@ -21,6 +21,10 @@ spec:
             - "server"
 
           env:
+            # REQUIRED: stop Vault from calling setcap
+            - name: SKIP_SETCAP
+              value: "true"
+
             - name: VAULT_ADDR
               value: "http://127.0.0.1:8200"
 
