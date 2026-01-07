@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/YOUR_GITHUB_USERNAME/vault-gitops.git
+    repoURL: https://github.com/aniketpitre/vault-testing.git
     targetRevision: main
     path: manifests
 
