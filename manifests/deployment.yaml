@@ -22,7 +22,6 @@ spec:
             - "-config=/vault/config/vault.hcl"
 
           env:
-            # REQUIRED: stop Vault from calling setcap
             - name: SKIP_SETCAP
               value: "true"
 
@@ -42,7 +41,6 @@ spec:
                 - ALL
 
           volumeMounts:
-            # Mount ONLY the config file (prevents chown issue)
             - name: vault-config
               mountPath: /vault/config/vault.hcl
               subPath: vault.hcl
