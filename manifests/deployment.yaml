@@ -26,10 +26,10 @@ spec:
               value: "true"
 
             - name: VAULT_ADDR
-              value: "http://127.0.0.1:8200"
+              value: "http://127.0.0.1:8201"
 
           ports:
-            - containerPort: 8200
+            - containerPort: 8201
 
           securityContext:
             runAsUser: 100
