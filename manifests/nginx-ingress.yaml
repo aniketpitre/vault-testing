@@ -17,9 +17,16 @@ rules:
   - apiGroups: [""]
     resources: ["configmaps", "endpoints", "nodes", "pods", "secrets", "services"]
     verbs: ["get", "list", "watch"]
+
   - apiGroups: ["networking.k8s.io"]
     resources: ["ingresses", "ingressclasses"]
     verbs: ["get", "list", "watch"]
+
+  # 🔧 REQUIRED FIX (EndpointSlice permission)
+  - apiGroups: ["discovery.k8s.io"]
+    resources: ["endpointslices"]
+    verbs: ["get", "list", "watch"]
+
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]
     verbs: ["get", "list", "watch", "create", "update"]
@@ -59,6 +66,7 @@ spec:
           args:
             - /nginx-ingress-controller
             - --ingress-class=nginx
+            - --controller-class=k8s.io/ingress-nginx
             - --watch-ingress-without-class=true
           env:
             - name: POD_NAME
