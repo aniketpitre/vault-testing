@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: vault
-  namespace: vault
+  namespace: aniket-test
 spec:
   replicas: 1
   selector:
@@ -17,8 +17,6 @@ spec:
       containers:
         - name: vault
           image: hashicorp/vault:1.15
-
-          # 🔑 CRITICAL FIX — override entrypoint
           command:
             - "vault"
             - "server"
@@ -27,7 +25,6 @@ spec:
           env:
             - name: SKIP_SETCAP
               value: "true"
-
             - name: VAULT_ADDR
               value: "http://127.0.0.1:8200"
 
@@ -40,15 +37,13 @@ spec:
             runAsNonRoot: true
             allowPrivilegeEscalation: false
             capabilities:
-              drop:
-                - ALL
+              drop: ["ALL"]
 
           volumeMounts:
             - name: vault-config
               mountPath: /vault/config/vault.hcl
               subPath: vault.hcl
               readOnly: true
-
             - name: data
               mountPath: /vault/data
 
@@ -56,7 +51,6 @@ spec:
         - name: vault-config
           configMap:
             name: vault-config
-
         - name: data
           persistentVolumeClaim:
             claimName: vault-data

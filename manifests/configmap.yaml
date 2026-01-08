@@ -2,13 +2,13 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: vault-config
-  namespace: vault
+  namespace: aniket-test
 data:
   vault.hcl: |
     ui = true
     disable_mlock = true
 
-    api_addr = "http://vault.vault.svc.cluster.local:8200"
+    api_addr = "http://vault.aniket-test.svc.cluster.local:8200"
     cluster_addr = "http://127.0.0.1:8201"
 
     storage "file" {
